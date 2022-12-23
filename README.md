@@ -19,7 +19,7 @@ Run the script to copy any .binds files in `%localappdata%\Frontier Developments
 ### Switches
 **-force**: The script will add a timestamp to the filename if the file already exists in the backup destination. Use `-force` to overwrite the file instead.
 
-**-backupDestination**: The backup will be placed in the working directory (where the script is being run) by default. Use `-backupDestination <location>` to use a different location. 
+**-backupPath**: The backup will be placed in the working directory (where the script is being run) by default. Use `-backupDestination <location>` to use a different location. 
 
 ## Support
 

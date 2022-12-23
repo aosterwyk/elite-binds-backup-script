@@ -1,26 +1,28 @@
 param(
     [switch]$force,
-    [string]$backupDestination
+    [string]$backupPath,
+    [switch]$resotre,
+    [string]$restorePath
 )
 
 write-host "o7 CMDR"
 $bindsLocation = "$($Env:localappdata)\Frontier Developments\Elite Dangerous\Options\Bindings"
 
 
-if($backupDestination) {
-    write-host "Backup destination set to $($backupDestination)."
+if($backupPath) {
+    write-host "Backup destination set to $($backupPath)."
 }
 else {
-    $backupDestination = get-location 
-    write-host "No backup destination set. Using working directory.($($backupDestination))"
-    write-host -foregroundcolor cyan "Hint: Use -backupDestination to set backup destination"
+    $backupPath = get-location 
+    write-host "No backup destination set. Using working directory.($($backupPath))"
+    write-host -foregroundcolor cyan "Hint: Use -backupPath to set backup destination"
 }
 
 write-host "`nChecking for binds in $($bindsLocation)`n"
 
 get-childitem "$($bindsLocation)\*.binds" | foreach-object {
     write-host "Found $($_.name) in binds directory"
-    if(Test-Path "$($backupDestination)\$($_.name)") {
+    if(Test-Path "$($backupPath)\$($_.name)") {
         write-host -forgroundcolor yellow "File already exists in backup destination."
         if($force) {
             write-host -foregroundcolor yellow "Force set. Overwriting file in backup destination."
@@ -36,7 +38,7 @@ get-childitem "$($bindsLocation)\*.binds" | foreach-object {
         write-host "File $($_.name) does not already exist in backup destination."
         $backupFilename = $_.name
     }
-    copy-item $_ -Destination "$($backupDestination)\$($backupFilename)"
-    write-host -foregroundcolor green "Copied to $($backupDestination)\$($backupFilename)"
+    copy-item $_ -Destination "$($backupPath)\$($backupFilename)"
+    write-host -foregroundcolor green "Copied to $($backupPath)\$($backupFilename)"
 }
 
