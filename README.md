@@ -26,6 +26,13 @@ Run the script to copy any .binds files in `%localappdata%\Frontier Developments
 
 **-force**: The script will add a timestamp to the filename if the file already exists in the backup destination. Use `-force` to overwrite the file instead.
 
+### Examples
+Backup binds to c:\temp\elite
+`eliteBindsBackup.ps1 -backup -backupPath c:\temp\elite`
+
+Restore binds from c:\temp\elite
+`eliteBindsBackup.ps1 -restore -backupPath c:\temp\elite`
+
 ## Support
 
 [Discord server](https://discord.gg/QNppY7T) or DM `VariXx#8317`
