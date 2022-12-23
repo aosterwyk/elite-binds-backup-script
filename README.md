@@ -14,7 +14,7 @@ If you are seeing execution policy errors use the command below to bypass execut
 
 ## Usage
 
-Run the script to copy any .binds files in `%localappdata%\Frontier Developments\Elite Dangerous\Options\Bindings` to the current directory.
+Run the script to backup or restore any .binds files in `%localappdata%\Frontier Developments\Elite Dangerous\Options\Bindings`. It will copy from/to the working directory by default. See the switches section below for more information. 
 
 ### Switches
 
