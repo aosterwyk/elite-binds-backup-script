@@ -2,12 +2,22 @@ param(
     [switch]$force,
     [string]$backupPath,
     [switch]$resotre,
-    [string]$restorePath
+    [string]$restorePath,
+    [switch]$update
 )
 
-write-host "o7 CMDR"
+$downloadURL = "https://github.com/aosterwyk/elite-config-backup-script/releases/latest"
 $bindsLocation = "$($Env:localappdata)\Frontier Developments\Elite Dangerous\Options\Bindings"
 
+write-host "Elite Config Backup Tool v0.1.0"
+write-host -foregroundcolor Yellow "This tool does not automatically update. Please periodically check for updates at the link below or use -update to open the downloads page."
+write-host $downloadURL
+write-host "`r`no7 CMDR"
+
+if($update) {
+    start $downloadURL
+    return
+}
 
 if($backupPath) {
     write-host "Backup destination set to $($backupPath)."
@@ -21,7 +31,7 @@ else {
 write-host "`nChecking for binds in $($bindsLocation)`n"
 
 get-childitem "$($bindsLocation)\*.binds" | foreach-object {
-    write-host "Found $($_.name) in binds directory"
+    write-host "Found $($_.name)"
     if(Test-Path "$($backupPath)\$($_.name)") {
         write-host -forgroundcolor yellow "File already exists in backup destination."
         if($force) {
@@ -35,10 +45,9 @@ get-childitem "$($bindsLocation)\*.binds" | foreach-object {
         }
     }
     else {
-        write-host "File $($_.name) does not already exist in backup destination."
+        # write-host "File $($_.name) does not already exist in backup destination."
         $backupFilename = $_.name
     }
     copy-item $_ -Destination "$($backupPath)\$($backupFilename)"
     write-host -foregroundcolor green "Copied to $($backupPath)\$($backupFilename)"
 }
-
