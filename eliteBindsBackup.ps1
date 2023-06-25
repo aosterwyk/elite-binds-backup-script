@@ -82,7 +82,7 @@ if($backup) {
         write-host "Found $($_.name)"
         # TODO - check if backup location exists
         if(Test-Path "$($backupPath)\$($_.name)") {
-            write-host -forgroundcolor yellow "File already exists in backup destination."
+            write-host -foregroundcolor yellow "File already exists in backup destination."
             if($force) {
                 write-host -foregroundcolor yellow "Force set. Overwriting file in backup destination."
                 $backupFilename = $_.name
