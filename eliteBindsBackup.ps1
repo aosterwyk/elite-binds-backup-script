@@ -9,7 +9,7 @@ param(
 $downloadURL = "https://github.com/aosterwyk/elite-binds-backup-script/releases/latest"
 $bindsLocation = "$($Env:localappdata)\Frontier Developments\Elite Dangerous\Options\Bindings"
 
-write-host -foregroundcolor Cyan "Elite Binds Backup Script v0.1.0"
+write-host -foregroundcolor Cyan "Elite Binds Backup Script v0.1.1"
 write-host -foregroundcolor Cyan $downloadURL
 write-host "This script does not automatically update. Please use -update to open the downloads page to check for updates."
 write-host "`r`no7 CMDR"
