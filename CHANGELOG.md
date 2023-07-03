@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 _No unreleased changes_
 
+## [0.1.1] - 2023-07-03
+### Fixes
+- Fixed typo in output message
+
 ## [0.1.0] - 2022-12-23
 ### Initial Release
 
+[0.1.1]: https://github.com/aosterwyk/elite-binds-backup-script/tree/v0.1.1 
 [0.1.0]: https://github.com/aosterwyk/elite-binds-backup-script/tree/v0.1.0 
 [Unreleased]: https://github.com/aosterwyk/elite-binds-backup-script/compare/master...dev
