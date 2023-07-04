@@ -9,7 +9,7 @@ param(
 
 $downloadURL = "https://github.com/aosterwyk/elite-binds-backup-script/releases/latest"
 $bindsLocation = "$($Env:localappdata)\Frontier Developments\Elite Dangerous\Options\Bindings"
-$version = "1.0.0-beta.1" 
+$version = "1.0.0"
 
 # Start UI
 
