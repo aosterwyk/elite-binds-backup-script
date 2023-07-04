@@ -11,6 +11,7 @@ _No unreleased changes_
 ### Added
 - Added UI
 - Added force for restore mode
+- Added checking for updates on launch
 
 ## [0.1.1] - 2023-07-03
 ### Fixes

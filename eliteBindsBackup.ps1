@@ -9,7 +9,7 @@ param(
 
 $downloadURL = "https://github.com/aosterwyk/elite-binds-backup-script/releases/latest"
 $bindsLocation = "$($Env:localappdata)\Frontier Developments\Elite Dangerous\Options\Bindings"
-$version = "1.0.0-beta.1"
+$version = "1.0.0-beta.1" 
 
 # Start UI
 
@@ -53,11 +53,8 @@ $versionText = $Window.FindName('Version')
 # End UI
 
 write-host -foregroundcolor Cyan "Elite Binds Backup Script $($version)"
-write-host -foregroundcolor Cyan $downloadURL
-write-host "This script does not automatically update. Please use -update to open the downloads page to check for updates."
-# write-host "`r`no7 CMDR"
-
-# TODO - create a function for adding to statusMsg and writing to host. it's very DRY. 
+# write-host -foregroundcolor Cyan $downloadURL
+# write-host "This script does not automatically update. Please use -update to open the downloads page to check for updates."
 
 function Update-Status {
     param(
@@ -184,7 +181,29 @@ function Backup-Config {
     return
 }
 
+function Check-Updates {
+    try {
+        $updateUri = "https://api.github.com/repos/aosterwyk/elite-binds-backup-script/releases/latest"
+        $updateHeaders = @{
+            "Accept" = "application/vnd.github+json"
+            "X-GitHub-Api-Version" = "2022-11-28"        
+        }
+
+        $updateCheck = Invoke-RestMethod -Uri $updateUri -headers $updateHeaders
+        update-status "Checking for updates..."
+        if($version -lt $updateCheck.name) {
+            update-status -foregroundcolor green "New update available. Please run -update to download the new version."
+        }
+        else { update-status "Newest version: $($updateCheck.name) Current version: $($version). You are running the newest version." }
+    }
+    catch {
+        update-status -foregroundcolor red "Error checking for updates. $($_)"
+    }   
+}
+
 if($backup -or $restore -or $help -or $update) { # don't load UI if using switches
+    write-host "`r`no7 CMDR"
+    Check-Updates 
     if($backup) { Backup-Config }
     if($restore) { Restore-Config }
     write-host "Need help with command line mode? Run the script with -help"
@@ -213,6 +232,7 @@ else {
     $pathTextBox.text = "$(get-location)"
     $statusMsg.text = "o7 CMDR`n"
     $versionText.text = $version    
+    Check-Updates    
 
     $statusMsg.text += "Using $($bindsLocation)`n"
     if(test-path $bindsLocation) {
@@ -243,3 +263,4 @@ else {
 
     $Window.ShowDialog() | Out-Null
 }
+
