@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "elite-binds-backup-script/1.0.0": {
+        "runtime": {
+          "elite-binds-backup-script.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "elite-binds-backup-script/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
