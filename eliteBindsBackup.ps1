@@ -3,6 +3,7 @@ param(
     [switch]$backup,
     [string]$backupPath,
     [switch]$restore,
+    [switch]$help,
     [switch]$update
 )
 
@@ -55,11 +56,6 @@ write-host -foregroundcolor Cyan "Elite Binds Backup Script $($version)"
 write-host -foregroundcolor Cyan $downloadURL
 write-host "This script does not automatically update. Please use -update to open the downloads page to check for updates."
 # write-host "`r`no7 CMDR"
-
-if($update) {
-    start $downloadURL
-    return
-}
 
 # TODO - create a function for adding to statusMsg and writing to host. it's very DRY. 
 
@@ -188,10 +184,14 @@ function Backup-Config {
     return
 }
 
-if($backup -or $restore -or $help) { # don't load UI if using switches
+if($backup -or $restore -or $help -or $update) { # don't load UI if using switches
     if($backup) { Backup-Config }
     if($restore) { Restore-Config }
     write-host "Need help with command line mode? Run the script with -help"
+    if($update) {
+        start $downloadURL
+        return
+    }    
     if($help) {
         write-host "`nHelp
         -backup: Backup mode
@@ -204,9 +204,9 @@ if($backup -or $restore -or $help) { # don't load UI if using switches
 
         Restore binds from c:\temp\elite
         eliteBindsBackup.ps1 -restore -backupPath c:\temp\elite`n"    
+        return
     }
 }
-
 else { 
     write-host "Script ran without switches. Starting UI."
 
